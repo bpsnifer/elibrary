@@ -37,7 +37,15 @@ $config = [
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'author'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'book'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'publishing-house'],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'publishing-house',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST <id:\d+>/book/<bookId:\d+>' => 'add-book',
+                        'DELETE <id:\d+>/book/<bookId:\d+>' => 'remove-book',
+                    ],
+                ],
             ],
         ],
         'request' => [

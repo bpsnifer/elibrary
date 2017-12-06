@@ -9,7 +9,8 @@ use \yii\db\ActiveRecord;
  *
  * @property int $id
  * @property int $author_id
- * @property string $name
+ * @property string $title
+ * @property string $description
  * @property int $year
  *
  * @property Author $author
@@ -31,9 +32,10 @@ class Book extends ActiveRecord
     public function rules()
     {
         return [
-            [['author_id', 'name'], 'required'],
+            [['author_id', 'title'], 'required'],
             [['author_id', 'year'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
+            [['description'], 'string'],
             [['author_id'], 'exist', 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
