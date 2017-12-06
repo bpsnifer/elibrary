@@ -8,7 +8,14 @@ class PublishingHouseController extends BaseController
 {
     public $modelClass = 'app\models\PublishingHouse';
 
-
+    /**
+     * @api {POST} /publishing-house/:id/book/:bookId Добавить книгу к изданию
+     *
+     * @apiParam {Number} id ID издания.
+     * @apiParam {Number} bookId ID книги.
+     *
+     * @apiSuccess {Bool} success success=true
+     */
     public function actionAddBook($id, $bookId)
     {
         $publishingHouse = PublishingHouse::findOne($id);
@@ -25,11 +32,21 @@ class PublishingHouseController extends BaseController
                 'name' => 'Adding book',
                 'message' => $res,
             ];
+        } else {
+            $res = ['success' => true];
         }
 
         return $res;
     }
 
+    /**
+     * @api {DELETE} /publishing-house/:id/book/:bookId Добавить книгу к изданию
+     *
+     * @apiParam {Number} id ID издания.
+     * @apiParam {Number} bookId ID книги.
+     *
+     * @apiSuccess {Bool} success success=true
+     */
     public function actionRemoveBook($id, $bookId)
     {
         $publishingHouse = PublishingHouse::findOne($id);
@@ -46,6 +63,8 @@ class PublishingHouseController extends BaseController
                 'name' => 'Removing book',
                 'message' => $res,
             ];
+        } else {
+            $res = ['success' => true];
         }
 
         return $res;
