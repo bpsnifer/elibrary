@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use \yii\db\ActiveRecord;
-
 /**
  * Модель таблицы author
  *
@@ -12,8 +10,20 @@ use \yii\db\ActiveRecord;
  *
  * @property Book[] $books
  */
-class Author extends ActiveRecord
+class Author extends BaseModel
 {
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        $this->detailFields = [
+            'books' => function ($model) {
+                return $model->books;
+            }
+        ];
+    }
+
     /**
      * @inheritdoc
      */

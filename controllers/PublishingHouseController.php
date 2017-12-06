@@ -9,7 +9,7 @@ class PublishingHouseController extends BaseController
     public $modelClass = 'app\models\PublishingHouse';
 
     /**
-     * @api {POST} /publishing-house/:id/book/:bookId Добавить книгу к изданию
+     * @api {POST} /publishing-house/:id/book/:bookId Добавить книгу к издательству
      *
      * @apiParam {Number} id ID издания.
      * @apiParam {Number} bookId ID книги.
@@ -40,7 +40,7 @@ class PublishingHouseController extends BaseController
     }
 
     /**
-     * @api {DELETE} /publishing-house/:id/book/:bookId Добавить книгу к изданию
+     * @api {DELETE} /publishing-house/:id/book/:bookId Добавить книгу к издательству
      *
      * @apiParam {Number} id ID издания.
      * @apiParam {Number} bookId ID книги.
@@ -68,5 +68,27 @@ class PublishingHouseController extends BaseController
         }
 
         return $res;
+    }
+
+    /**
+     * @api {GET} /publishing-house/:id Просмотреть издательство детально
+     *
+     * @apiParam {Number} id ID издательства.
+     *
+     * @apiSuccess {Number}   id                ID издательства
+     * @apiSuccess {String}   name              Название издательства
+     * @apiSuccess {Object[]} Book              Список книг
+     * @apiSuccess {Number}   Book.id           ID
+     * @apiSuccess {Number}   Book.author_id    ID автора
+     * @apiSuccess {String}   Book.title        Заголовок
+     * @apiSuccess {String}   Book.description  Описание
+     * @apiSuccess {Number}   Book.year         Год
+     */
+    public function actionDetail($id)
+    {
+        $publishingHouse = PublishingHouse::findOne($id);
+        $publishingHouse->scenario = PublishingHouse::SCENARIO_DETAIL;
+
+        return $publishingHouse;
     }
 }
